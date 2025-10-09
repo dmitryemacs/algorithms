@@ -1,0 +1,15 @@
+(defun binary-search (array target)
+  (labels ((recursive-search (low high)
+             (if (<= low high)
+                 (let ((mid (floor (+ low high) 2)))
+                   (if (= (aref array mid) target)
+                       mid
+                       (if (< (aref array mid) target)
+                           (recursive-search (1+ mid) high)
+                           (recursive-search low (1- mid)))))
+                 -1)))
+    (recursive-search 0 (1- (length array)))))
+
+(let ((arr #(1 2 3 4 5 6 7 8 9 10))
+      (target 5))
+  (print (binary-search arr target)))
